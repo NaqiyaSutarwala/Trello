@@ -1,0 +1,97 @@
+.background {
+  height: 100%;
+  width: 100%;
+}
+.mainDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 97vh;
+  overflow: hidden;
+}
+
+.imageLeft {
+  background-image: url("https://id-frontend.prod-east.frontend.public.atl-paas.net/assets/trello-left.4f52d13c.svg");
+  background-repeat: no-repeat;
+  height: 350px;
+  width: 370px;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+}
+
+.imageRight {
+  background-image: url("https://id-frontend.prod-east.frontend.public.atl-paas.net/assets/trello-right.3ee60d6f.svg");
+  background-repeat: no-repeat;
+  height: 350px;
+  width: 370px;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+}
+
+.signUpTitle {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #172b4d;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 0;
+}
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px;
+  width: 400px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.logoImg {
+  width: 120px;
+  height: 40px;
+  margin: 0px;
+}
+
+.button {
+  width: 100%;
+  height: 40px;
+}
+
+.signUpParagraph {
+  color: #0c66e4;
+}
+
+.authLogo {
+  height: 24px;
+  width: 24px;
+  padding-right: 10px;
+}
+
+.authText {
+  color: #172b4d;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 40px;
+  text-align: center;
+  font-family: sans-serif;
+  text-transform: capitalize;
+}
+
+.text {
+  color: #44546f;
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.signInText {
+  padding: 10px;
+  font-size: 14px;
+  line-height: 17.15px;
+  word-spacing: 2px;
+  font-weight: 500;
+}
