@@ -14,6 +14,7 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import NavigationBar from "../../components/NavigationBar/NavigationBar";
+import "../../stylesheet/global.css";
 
 import styles from "./BoardPage.module.css";
 import Lists from "../../components/Lists/Lists";
@@ -47,14 +48,14 @@ export default function BoardPage() {
         open={open}
         sx={{
           "& .MuiDrawer-paper": {
-            backgroundColor: "#287563",
-            color: "#ffffff",
+            backgroundColor: "var(--header-color)",
+            color: "black",
           },
           "& .css-1r9jet7": {
             minHeight: "50px",
             display: "flex",
             justifyContent: "space-between",
-            backgroundColor: "#287563",
+            backgroundColor: "var(--header-color)",
           },
         }}
       >
@@ -63,7 +64,13 @@ export default function BoardPage() {
             <div className={styles.boardInitialDiv}>T</div>
             <div className={styles.trelloLogo}>Trello</div>
           </div>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton
+            onClick={handleDrawerClose}
+            sx={{
+              backgroundColor: "#ffe5fd75",
+              padding: "0px",
+            }}
+          >
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
             ) : (
@@ -74,7 +81,11 @@ export default function BoardPage() {
         <Divider />
         <List>
           {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
+            <ListItem
+              key={text}
+              disablePadding
+              sx={{ display: "block", color: "white" }}
+            >
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -101,38 +112,10 @@ export default function BoardPage() {
           ))}
         </List>
         <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  {index % 2 === 0 ? (
-                    <InboxIcon sx={{ color: "white" }} />
-                  ) : (
-                    <MailIcon sx={{ color: "white" }} />
-                  )}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
       </Drawer>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p: 3, backgroundColor: "#3b7b6c" }}
+        sx={{ flexGrow: 1, p: 3, backgroundColor: "var(--background-color)" }}
       >
         <DrawerHeader />
         <div

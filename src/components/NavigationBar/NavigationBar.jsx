@@ -8,13 +8,13 @@ const NavigationBar = ({ handleDrawerOpen, open }) => {
   return (
     <div className={styles.navBar}>
       <IconButton
-        color="inherit"
         aria-label="open drawer"
         onClick={handleDrawerOpen}
         edge="start"
         sx={{
           paddingLeft: 2.5,
           marginRight: 5,
+          color: "white",
           ...(open && { display: "none" }),
         }}
       >

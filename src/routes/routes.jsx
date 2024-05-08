@@ -1,5 +1,5 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
-import Authentication from "../pages/Signup/Authentication";
+import Authentication from "../pages/AuthenticationForm/Authentication";
 import BoardPage from "../pages/BoardPage/BoardPage";
 import ProtectedRoute from "./ProtectedRoute";
 import Lists from "../components/Lists/Lists";
@@ -29,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/workspace",
         element: <WorkspacePage />,
+      },
+      {
+        path: "/workspace/:id",
+        element: <Lists />,
       },
       {
         path: "board",

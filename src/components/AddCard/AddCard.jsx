@@ -1,9 +1,18 @@
 import { Button, TextField } from "@mui/material";
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
+import { useDispatch } from "react-redux";
+import { addList } from "../../ListsSlice";
 
-const AddCard = ({ setOpenAddCard, list, type }) => {
+const AddCard = ({ setOpenAddCard, list, type, setOpenAddList }) => {
   const [cardTitle, setCardTitle] = useState();
+  const dispatch = useDispatch();
+
+  const handleListAdd = () => {
+    console.log("here");
+    dispatch(addList(cardTitle));
+    setOpenAddList(false);
+  };
 
   return (
     <div
@@ -52,14 +61,16 @@ const AddCard = ({ setOpenAddCard, list, type }) => {
         <Button
           variant="contained"
           onClick={() => {
-            list.card.push({ ...list, cardTitle });
+            type === "list" && handleListAdd();
+            // list.card.push({ ...list, cardTitle });
           }}
         >
           Add {type === "Card" ? "card" : "list"}
         </Button>
         <Button
           onClick={() => {
-            setOpenAddCard(false);
+            type === "card" && setOpenAddCard(false);
+            type === "list" && setOpenAddList(false);
           }}
         >
           <CloseIcon

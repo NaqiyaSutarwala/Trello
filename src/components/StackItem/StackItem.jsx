@@ -10,10 +10,10 @@ const StackItem = ({ styles, list }) => {
     <div>
       <h3 className={styles.listTitle}>{list.listTitle}</h3>
       <div style={{ clear: "both" }}></div>
-      {list.card.length > 0 &&
+      {/* {list.card.length > 0 &&
         list.card.map((card, index) => {
           return <SimplePaper key={index} title={card.cardTitle}></SimplePaper>;
-        })}
+        })} */}
       <div>
         {openAddCard ? (
           <AddCard setOpenAddCard={setOpenAddCard} list={list} type="Card" />

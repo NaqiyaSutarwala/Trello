@@ -1,0 +1,13 @@
+.mainGrid {
+  display: grid;
+  grid-template-columns: 270px 270px 270px 270px 270px;
+  gap: 20px;
+}
+
+.addCardButton {
+  height: 100px;
+  width: 265px;
+  border-radius: 10px;
+  background-color: var(--button-color);
+  color: black;
+}

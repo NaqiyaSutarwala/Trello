@@ -1,11 +1,6 @@
 .boardInitialDiv {
-  background: rgb(16, 152, 98);
-  background: linear-gradient(
-    180deg,
-    rgba(16, 152, 98, 1) 0%,
-    rgba(32, 217, 125, 1) 79%
-  );
-  color: #34645e;
+  background: linear-gradient(180deg, rgb(105, 40, 96) 0%, rgb(71, 51, 73) 79%);
+  color: white;
   height: 30px;
   width: 30px;
   border-radius: 5px;
@@ -18,4 +13,5 @@
   padding-left: 4px;
   margin: auto;
   font-family: cursive;
+  color: white;
 }

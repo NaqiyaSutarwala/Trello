@@ -1,6 +1,11 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { currentWorkspace } from "../../ListsSlice";
 
-const BoardLists = () => {
+const BoardLists = ({ boardTitle, id }) => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   return (
     <div
       style={{
@@ -9,9 +14,18 @@ const BoardLists = () => {
         borderRadius: 10,
         backgroundColor: "#091e4224",
         color: "black",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        cursor: "pointer",
+      }}
+      onClick={() => {
+        console.log(id);
+        dispatch(currentWorkspace(id));
+        navigate(`/workspace/${id}`);
       }}
     >
-      BoardLists
+      {boardTitle}
     </div>
   );
 };

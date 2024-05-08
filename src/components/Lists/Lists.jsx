@@ -1,52 +1,13 @@
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
-import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import styles from "./Lists.module.css";
-import SimplePaper from "../Card/Card";
+import StackItem from "../StackItem/StackItem";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { useState } from "react";
 import AddCard from "../AddCard/AddCard";
-import StackItem from "../StackItem/StackItem";
-import ButtonComponent from "../../common/ButtonComponent";
-
-const dataLists = [
-  {
-    listTitle: "To Do",
-    card: [
-      {
-        cardTitle: "First Card",
-      },
-      {
-        cardTitle: "Second Card",
-      },
-    ],
-  },
-  {
-    listTitle: "Pending",
-    card: [],
-  },
-  {
-    listTitle: "Done",
-    card: [],
-  },
-  {
-    listTitle: "Unique",
-    card: [],
-  },
-  {
-    listTitle: "Unique",
-    card: [],
-  },
-  {
-    listTitle: "Unique",
-    card: [],
-  },
-  {
-    listTitle: "Unique",
-    card: [],
-  },
-];
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -57,6 +18,21 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const Lists = () => {
+  const [openAddList, setOpenAddList] = useState(false);
+
+  const { boards, currentWorkspace } = useSelector((state) => {
+    return state.currentUser;
+  });
+
+  const currentUser = useSelector((state) => {
+    return state.currentUser;
+  });
+
+  const currentWorkspaceObj = boards.filter((board) => {
+    return board.boardId === currentWorkspace;
+  });
+  console.log(currentWorkspaceObj, "qww");
+
   return (
     <div>
       <Stack
@@ -68,25 +44,43 @@ const Lists = () => {
           },
         }}
       >
-        {dataLists.map((list) => {
+        {currentWorkspaceObj[0].lists?.map((list) => {
+          console.log(list, "qwer");
           return (
             <Item key={list.listTitle} className={styles.listItems}>
               <StackItem list={list} styles={styles}></StackItem>
             </Item>
           );
         })}
+
         {/* TODO: Changed styles */}
-        <button
-          className={styles.button}
-          style={{
-            padding: "10px",
-            backgroundColor: "#091e4224",
-            color: "white",
-          }}
-        >
-          <AddIcon sx={{ color: "white" }} />
-          <span style={{ paddingLeft: "8px" }}>Add a List</span>
-        </button>
+        {openAddList ? (
+          <div
+            style={{
+              backgroundColor: "white",
+              borderRadius: "10px",
+              padding: "5px",
+              height: "fit-content",
+            }}
+          >
+            <AddCard type="list" setOpenAddList={setOpenAddList} />
+          </div>
+        ) : (
+          <button
+            onClick={() => {
+              setOpenAddList(true);
+            }}
+            className={styles.button}
+            style={{
+              padding: "10px",
+              backgroundColor: "#091e4224",
+              color: "white",
+            }}
+          >
+            <AddIcon sx={{ color: "white" }} />
+            <span style={{ paddingLeft: "8px" }}>Add a List</span>
+          </button>
+        )}
       </Stack>
     </div>
   );
