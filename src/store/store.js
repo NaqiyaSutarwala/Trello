@@ -1,11 +1,12 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import ListsSlice from "../ListsSlice";
+import ListsSlice from "../ListsTrySlice";
 import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
-import userSlice from "./slice/User/userSlice";
 import workspaceSlice from "./slice/Workspace/workspaceSlice";
 import listsSlice from "./slice/Lists/listsSlice";
 import cardSlice from "./slice/card/cardSlice";
+import UserSlice from "./slice/User/userSlice";
+import ListsTrySlice from "../ListsTrySlice";
 
 const persistConfig = {
   key: "root",
@@ -13,10 +14,11 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  user: userSlice,
+  user: UserSlice,
   workspace: workspaceSlice,
   lists: listsSlice,
   cards: cardSlice,
+  data: ListsTrySlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

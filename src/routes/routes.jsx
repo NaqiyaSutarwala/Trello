@@ -1,9 +1,9 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 import Authentication from "../pages/AuthenticationForm/Authentication";
-import BoardPage from "../pages/BoardPage/BoardPage";
 import ProtectedRoute from "./ProtectedRoute";
-import Lists from "../components/Lists/Lists";
 import WorkspacePage from "../pages/WorkspacePage/WorkspacePage";
+import ListsPage from "../pages/ListsPage/ListsPage";
+import Layout from "../pages/Layout/Layout";
 
 const router = createBrowserRouter([
   {
@@ -17,12 +17,13 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Authentication type="signup" />,
+    
   },
   {
     path: "/workspace",
     element: (
       <ProtectedRoute>
-        <BoardPage />
+        <Layout />
       </ProtectedRoute>
     ),
     children: [
@@ -32,11 +33,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/workspace/:id",
-        element: <Lists />,
+        element: <ListsPage />,
       },
       {
-        path: "board",
-        element: <Lists />,
+        path: "Lists",
+        element: <ListsPage />,
       },
     ],
   },

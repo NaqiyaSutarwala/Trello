@@ -1,21 +1,33 @@
 import { Button } from "@mui/material";
 import React, { useState } from "react";
-import BoardLists from "../../components/Board list/BoardLists";
-import AddBoardDialog from "../../components/AddBoardDialog/AddBoardDialog";
 import styles from "./WorkspacePage.module.css";
 import "../../stylesheet/global.css";
 import { useSelector } from "react-redux";
+import AddWorkSpaceDialog from "../../components/AddWorkspaceDialog/AddWorkspaceDialog";
+import WorkspaceCard from "../../components/Workspace Card/WorkspaceCard";
 
 const WorkspacePage = () => {
-  const [openAddBoard, setOpenAddBoard] = useState(false);
-  const currentUser = useSelector((store) => {
-    return store.currentUser;
+  const [openAddWorkspace, setOpenAddWorkspace] = useState(false);
+  const { currentUserId } = useSelector((store) => {
+    return store.user;
   });
-  console.log(currentUser);
+
+  const { workspace } = useSelector((store) => {
+    return store.workspace;
+  });
+
+  const allWorkspacesOfCurrentUser = workspace.filter((workspace) => {
+    return workspace.userId === currentUserId;
+  });
+
   return (
     <>
-      {openAddBoard && (
-        <AddBoardDialog setOpenAddBoard={setOpenAddBoard} show={openAddBoard} />
+      {openAddWorkspace && (
+        <AddWorkSpaceDialog
+          setOpenAddWorkspace={setOpenAddWorkspace}
+          show={openAddWorkspace}
+          type="add"
+        />
       )}
       <div className={styles.mainGrid}>
         <Button
@@ -29,19 +41,18 @@ const WorkspacePage = () => {
           }}
           className={styles.addCardButton}
           onClick={() => {
-            setOpenAddBoard(true);
+            setOpenAddWorkspace(true);
           }}
         >
           Add new Workspace
         </Button>
 
-        {currentUser.boards?.map((board) => {
-          console.log(board.boardId);
+        {allWorkspacesOfCurrentUser.map((workspace) => {
           return (
-            <BoardLists
-              key={board.boardId}
-              boardTitle={board.boardTitle}
-              id={board.boardId}
+            <WorkspaceCard
+              key={workspace.workspaceId}
+              workspace={workspace}
+              id={workspace.workspaceId}
             />
           );
         })}

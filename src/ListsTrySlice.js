@@ -4,7 +4,6 @@ import { v4 as uuid } from "uuid";
 const uniqueId = uuid();
 const id = uniqueId.slice(0, 8);
 const listId = uuid().slice(0, 8);
-console.log("in");
 
 const initialState = {
   data: [],

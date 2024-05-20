@@ -1,18 +1,23 @@
-import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { TextField } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { addWorkSpace } from "../../ListsSlice";
 import { ClickAwayListener } from "@mui/base/ClickAwayListener";
+import { useState } from "react";
+import { updateLists } from "../../store/slice/Lists/listsSlice";
 
-export default function AddBoardDialog({ setOpenAddBoard, show }) {
+export default function EditListsDialog({ list, show, setOpenEditListDialog }) {
+  const [listTitle, setListTitle] = useState("");
+
   const dispatch = useDispatch();
-  const [boardTitle, setBoardTitle] = React.useState("");
+  const listId = list.listId;
+
+  const handleUpdateWorkspace = () => {
+    dispatch(updateLists({ listId, listTitle }));
+    setOpenEditListDialog(false);
+  };
 
   return (
     <>
@@ -25,23 +30,25 @@ export default function AddBoardDialog({ setOpenAddBoard, show }) {
         }}
         open={show}
       >
-        <ClickAwayListener onClickAway={() => {
-            setOpenAddBoard(false)
-        }}>
+        <ClickAwayListener
+          onClickAway={() => {
+            setOpenEditListDialog(false);
+          }}
+        >
           <div>
             <DialogTitle
               style={{ textAlign: "center" }}
               id="alert-dialog-title"
             >
-              Create Board
+              Edit Lists Title
             </DialogTitle>
             <DialogContent>
               <TextField
                 onBlur={(e) => {
-                  setBoardTitle(e.target.value);
+                  setListTitle(e.target.value);
                 }}
                 id="outlined-basic"
-                label="Board Title"
+                label="List Title"
                 variant="outlined"
                 sx={{
                   marginTop: "10px",
@@ -51,17 +58,32 @@ export default function AddBoardDialog({ setOpenAddBoard, show }) {
             </DialogContent>
             <Button
               onClick={() => {
-                dispatch(addWorkSpace(boardTitle));
-                setOpenAddBoard(false);
+                handleUpdateWorkspace();
               }}
               variant="contained"
               style={{
+                minWidth: "405px",
                 margin: "20px",
                 marginTop: "0",
                 backgroundColor: "var(--header-color)",
               }}
             >
-              Create
+              Update
+            </Button>
+            <br />
+            <Button
+              onClick={() => {
+                setOpenEditListDialog(false);
+              }}
+              variant="contained"
+              style={{
+                width: "405px",
+                margin: "20px",
+                marginTop: "0",
+                backgroundColor: "var(--header-color)",
+              }}
+            >
+              Cancel
             </Button>
           </div>
         </ClickAwayListener>

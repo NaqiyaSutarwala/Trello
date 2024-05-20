@@ -1,4 +1,3 @@
-import MiniDrawer from "./pages/BoardPage/BoardPage";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { RouterProvider } from "react-router-dom";
 

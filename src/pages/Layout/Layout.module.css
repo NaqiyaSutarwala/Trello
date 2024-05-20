@@ -1,0 +1,17 @@
+.boardInitialDiv {
+  background: linear-gradient(180deg, rgb(105, 40, 96) 0%, rgb(71, 51, 73) 79%);
+  color: white;
+  height: 30px;
+  width: 30px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trelloLogo {
+  padding-left: 4px;
+  margin: auto;
+  font-family: cursive;
+  color: white;
+}

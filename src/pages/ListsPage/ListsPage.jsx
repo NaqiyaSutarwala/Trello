@@ -2,12 +2,12 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import AddIcon from "@mui/icons-material/Add";
-import styles from "./Lists.module.css";
-import StackItem from "../StackItem/StackItem";
+import StackItem from "../../components/StackItem/StackItem";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import AddCard from "../AddCard/AddCard";
+import AddCard from "../../components/AddCard/AddCard";
+import styles from "./ListsPage.module.css";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -17,21 +17,29 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.secondary,
 }));
 
-const Lists = () => {
+const ListsPage = () => {
   const [openAddList, setOpenAddList] = useState(false);
+  const { id: currentWorkspaceId } = useParams();
 
-  const { boards, currentWorkspace } = useSelector((state) => {
-    return state.currentUser;
+  const { lists } = useSelector((store) => {
+    return store.lists;
   });
 
-  const currentUser = useSelector((state) => {
-    return state.currentUser;
+  const currentWorkspaceLists = lists.filter((list) => {
+    return list.workspaceId === currentWorkspaceId;
   });
 
-  const currentWorkspaceObj = boards.filter((board) => {
-    return board.boardId === currentWorkspace;
-  });
-  console.log(currentWorkspaceObj, "qww");
+  // const { boards, currentWorkspace } = useSelector((state) => {
+  //   return state.currentUser;
+  // });
+
+  // const currentUser = useSelector((state) => {
+  //   return state.currentUser;
+  // });
+
+  // const currentWorkspaceObj = boards.filter((board) => {
+  //   return board.boardId === currentWorkspace;
+  // });
 
   return (
     <div>
@@ -44,8 +52,7 @@ const Lists = () => {
           },
         }}
       >
-        {currentWorkspaceObj[0].lists?.map((list) => {
-          console.log(list, "qwer");
+        {currentWorkspaceLists?.map((list) => {
           return (
             <Item key={list.listTitle} className={styles.listItems}>
               <StackItem list={list} styles={styles}></StackItem>
@@ -86,4 +93,4 @@ const Lists = () => {
   );
 };
 
-export default Lists;
+export default ListsPage;

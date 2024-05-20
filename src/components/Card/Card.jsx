@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 
-export default function SimplePaper({ title }) {
+export default function Card({ title }) {
   return (
     <Box
       sx={{

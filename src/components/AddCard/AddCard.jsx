@@ -1,17 +1,37 @@
 import { Button, TextField } from "@mui/material";
 import React, { useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
-import { useDispatch } from "react-redux";
-import { addList } from "../../ListsSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addLists } from "../../store/slice/Lists/listsSlice";
+import { addCard } from "../../store/slice/card/cardSlice";
 
-const AddCard = ({ setOpenAddCard, list, type, setOpenAddList }) => {
-  const [cardTitle, setCardTitle] = useState();
+const AddCard = ({ setOpenAddCard, type, setOpenAddList, currentListId }) => {
+  const [title, setTitle] = useState();
   const dispatch = useDispatch();
 
-  const handleListAdd = () => {
-    console.log("here");
-    dispatch(addList(cardTitle));
+  const { currentWorkSpaceId } = useSelector((store) => {
+    return store.workspace;
+  });
+
+  const handleAddList = () => {
+    dispatch(
+      addLists({
+        workspaceId: currentWorkSpaceId,
+        listTitle: title,
+      })
+    );
     setOpenAddList(false);
+  };
+
+  const handleAddCard = () => {
+    dispatch(
+      addCard({
+        cardTitle: title,
+        cardDescription: "as",
+        listId: currentListId,
+      })
+    );
+    setOpenAddCard(false);
   };
 
   return (
@@ -22,9 +42,9 @@ const AddCard = ({ setOpenAddCard, list, type, setOpenAddList }) => {
     >
       <TextField
         onChange={(e) => {
-          setCardTitle(e.target.value);
+          setTitle(e.target.value);
         }}
-        value={cardTitle}
+        value={title}
         type="text"
         placeholder={`Enter a title for this ${
           type === "Card" ? "card" : "list"
@@ -61,15 +81,15 @@ const AddCard = ({ setOpenAddCard, list, type, setOpenAddList }) => {
         <Button
           variant="contained"
           onClick={() => {
-            type === "list" && handleListAdd();
-            // list.card.push({ ...list, cardTitle });
+            type === "list" && handleAddList();
+            type === "Card" && handleAddCard();
           }}
         >
           Add {type === "Card" ? "card" : "list"}
         </Button>
         <Button
           onClick={() => {
-            type === "card" && setOpenAddCard(false);
+            type === "Card" && setOpenAddCard(false);
             type === "list" && setOpenAddList(false);
           }}
         >

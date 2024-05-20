@@ -10,7 +10,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { useDispatch } from "react-redux";
-import { logIn } from "../../ListsSlice";
+import { userLogin } from "../../store/slice/User/userSlice";
 
 const Authentication = ({ type }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,7 +24,8 @@ const Authentication = ({ type }) => {
 
   const loginDispatch = () => {
     if (type === "login" && showPassword) {
-      dispatch(logIn({ username: userName, password: password }));
+      dispatch(userLogin({ userName, password }));
+      // dispatch(userLogin({ username: userName, password: password }));
       navigate("/workspace");
     }
   };

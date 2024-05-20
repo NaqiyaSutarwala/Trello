@@ -1,10 +1,17 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
-  const isAuthenticated = true;
+  const { users, currentUserId } = useSelector((store) => {
+    return store.user;
+  });
 
-  if (!isAuthenticated) {
+  const currentUser = users.find((user) => {
+    return user.userId === currentUserId;
+  });
+
+  if (!currentUser.isLoggedIn) {
     return <Navigate to="/login" />;
   }
 
